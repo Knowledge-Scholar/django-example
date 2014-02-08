@@ -22,6 +22,10 @@ ADMINS = (
 MANAGERS = ADMINS
 
 if ON_OPENSHIFT:
+    # This will need to be changed if / when a custom domain is used
+    ALLOWED_HOSTS = [ os.environ['OPENSHIFT_APP_DNS'] ]
+
+if ON_OPENSHIFT:
     # os.environ['OPENSHIFT_MYSQL_DB_*'] variables can be used with databases created
     # with rhc cartridge add (see /README in this git repo)
     DATABASES = {
@@ -136,7 +140,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'openshift.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
